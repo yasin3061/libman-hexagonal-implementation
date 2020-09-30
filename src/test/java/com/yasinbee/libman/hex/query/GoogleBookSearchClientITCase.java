@@ -40,7 +40,7 @@ public class GoogleBookSearchClientITCase {
 
         String responseString = client.searchForBooks("harry potter");
         JsonObject response = JsonParser.parseString(responseString).getAsJsonObject();
-        assertTrue(response.getAsJsonArray("items").size() == 4);
+        assertEquals(response.getAsJsonArray("items").size(), 4);
     }
 
     @Test
