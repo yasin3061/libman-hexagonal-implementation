@@ -218,28 +218,28 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>component-test</id>
+			<id>api-test</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>build-helper-maven-plugin</artifactId>
-						<version>3.0.0</version>
+						<version>3.2.0</version>
 						<executions>
 							<execution>
-								<id>add-component-test-sources</id>
+								<id>add-api-test-sources</id>
 								<phase>generate-test-sources</phase>
 								<goals>
 									<goal>add-test-source</goal>
 								</goals>
 								<configuration>
 									<sources>
-										<source>src/component-test/java</source>
+										<source>src/api-test/java</source>
 									</sources>
 								</configuration>
 							</execution>
 							<execution>
-								<id>add-component-test-resources</id>
+								<id>add-api-test-resources</id>
 								<phase>generate-test-resources</phase>
 								<goals>
 									<goal>add-test-resource</goal>
@@ -247,7 +247,7 @@
 								<configuration>
 									<resources>
 										<resource>
-											<directory>src/component-test/resources</directory>
+											<directory>src/api-test/resources</directory>
 										</resource>
 									</resources>
 								</configuration>
