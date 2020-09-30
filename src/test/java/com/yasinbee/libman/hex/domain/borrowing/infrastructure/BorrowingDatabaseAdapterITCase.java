@@ -32,7 +32,7 @@ public class BorrowingDatabaseAdapterITCase {
     private BorrowingDatabaseAdapter database;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         database = new BorrowingDatabaseAdapter(jdbcTemplate);
         databaseHelper = new DatabaseHelper(jdbcTemplate);
     }
@@ -41,7 +41,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Save book as available")
     @Sql("/book-and-user.sql")
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldSaveAvailableBook(){
+    public void shouldSaveAvailableBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
 
@@ -57,7 +57,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Get available book by id")
     @Sql({"/book-and-user.sql", "/available-book.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldGetAvailableBook(){
+    public void shouldGetAvailableBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
 
@@ -89,7 +89,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Save reserved book")
     @Sql({"/book-and-user.sql", "/available-book.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldSaveReservedBook(){
+    public void shouldSaveReservedBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
         Long activeUserId = databaseHelper.getJohnDoeUserId();
@@ -109,7 +109,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Get reserved book by its id")
     @Sql({"/book-and-user.sql", "/reserved-book.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldFindReservedBook(){
+    public void shouldFindReservedBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
 
@@ -125,7 +125,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Save borrowed book")
     @Sql({"/book-and-user.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldSaveBorrowedBook(){
+    public void shouldSaveBorrowedBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
         Long activeUserId = databaseHelper.getJohnDoeUserId();
@@ -144,7 +144,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Find book after 3 days of reservation")
     @Sql({"/book-and-user.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldFindOverdueReservations(){
+    public void shouldFindOverdueReservations() {
         //given
         Long overdueBookId = databaseHelper.getHomoDeusBookId();
         Long johnDoeUserId = databaseHelper.getJohnDoeUserId();
@@ -165,7 +165,7 @@ public class BorrowingDatabaseAdapterITCase {
     @DisplayName("Find borrowed book by id")
     @Sql({"/book-and-user.sql", "/borrowed-book.sql"})
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldFindBorrowedBook(){
+    public void shouldFindBorrowedBook() {
         //given
         Long bookId = databaseHelper.getHomoDeusBookId();
 

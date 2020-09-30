@@ -11,18 +11,19 @@ import java.util.regex.Pattern;
 @EqualsAndHashCode
 public class EmailAddress {
 
-    @Column(name="email")
+    @Column(name = "email")
     private String value;
 
     public EmailAddress(String value) {
         Pattern pattern = Pattern.compile("^(.+)@(.+)$");
         Matcher matcher = pattern.matcher(value);
-        if(matcher.matches()){
+        if (matcher.matches()) {
             this.value = value;
         } else {
             throw new IllegalArgumentException("Provided value is not an email address");
         }
     }
 
-    private EmailAddress(){}
+    private EmailAddress() {
+    }
 }

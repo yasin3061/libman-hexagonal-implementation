@@ -6,5 +6,6 @@ import com.yasinbee.libman.hex.domain.inventory.core.ports.outgoing.InventoryEve
 public class InvenotryEventPublisherFake implements InventoryEventPublisher {
 
     @Override
-    public void publishNewBookWasAddedEvent(NewBookWasAddedEvent event) { }
+    public void publishNewBookWasAddedEvent(NewBookWasAddedEvent event) {
+    }
 }

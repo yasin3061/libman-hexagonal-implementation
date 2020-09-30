@@ -30,11 +30,12 @@ public class GoogleBookSearchClientITCase {
 
     @Test
     @DisplayName("Search for a book")
-    public void whenSearchForBooks_thenGetListOfBooks(){
+    public void whenSearchForBooks_thenGetListOfBooks() {
         //given
         String harryPotterSearchResponse = BookTestData.harryPotterSearchResponse();
         server.expect(requestTo(
-                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40&printType=books&q=" + "harry%20potter"))
+                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40" +
+                        "&printType=books&q=" + "harry%20potter"))
                 .andRespond(withSuccess(harryPotterSearchResponse, MediaType.APPLICATION_JSON));
 
         String responseString = client.searchForBooks("harry potter");
@@ -44,11 +45,12 @@ public class GoogleBookSearchClientITCase {
 
     @Test
     @DisplayName("Search for a book and get empty result")
-    public void whenSearchForBooks_thenGetEmptyResult(){
+    public void whenSearchForBooks_thenGetEmptyResult() {
         //given
         String noBooksResponse = BookTestData.noBooksSearchResponse();
         server.expect(requestTo(
-                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40&printType=books&q=" + "djfjbasdknl"))
+                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40" +
+                        "&printType=books&q=" + "djfjbasdknl"))
                 .andRespond(withSuccess(noBooksResponse, MediaType.APPLICATION_JSON));
 
         //when

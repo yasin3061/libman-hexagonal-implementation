@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="library_user")
+@Table(name = "library_user")
 @EqualsAndHashCode
 public class User {
 
@@ -23,10 +23,10 @@ public class User {
     @Embedded
     private EmailAddress emailAddress;
 
-    @Column(name="first_name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
     public User(EmailAddress emailAddress, String firstName, String lastName) {
@@ -35,9 +35,10 @@ public class User {
         this.lastName = lastName;
     }
 
-    public Long getIdentifierAsLong(){
-        return id;
+    private User() {
     }
 
-    private User(){}
+    public Long getIdentifierAsLong() {
+        return id;
+    }
 }

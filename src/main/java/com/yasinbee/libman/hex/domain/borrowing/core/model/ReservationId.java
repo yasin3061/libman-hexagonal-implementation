@@ -10,7 +10,7 @@ public class ReservationId {
         this.id = id;
     }
 
-    public Long getIdAsLong(){
+    public Long getIdAsLong() {
         return id;
     }
 }

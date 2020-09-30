@@ -18,7 +18,7 @@ public class BookCommandController {
     private final AddNewBook addNewBook;
 
     @PostMapping("")
-    public ResponseEntity<String> addNewBook(@RequestBody AddNewBookCommand addNewBookCommand){
+    public ResponseEntity<String> addNewBook(@RequestBody AddNewBookCommand addNewBookCommand) {
         addNewBook.handle(addNewBookCommand);
         return new ResponseEntity<>("New book was added to library", HttpStatus.CREATED);
     }

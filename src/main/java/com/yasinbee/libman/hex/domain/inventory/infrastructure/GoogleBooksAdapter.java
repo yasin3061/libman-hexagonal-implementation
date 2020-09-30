@@ -43,7 +43,8 @@ public class GoogleBooksAdapter implements GetBookDetails {
 
         JsonObject response = ofNullable(responseEntity.getBody())
                 .map(stringBody -> JsonParser.parseString(stringBody).getAsJsonObject())
-                .orElseThrow(() -> new RuntimeException("There is no body inside the response from Google Books API"));
+                .orElseThrow(() -> new RuntimeException("There is no body inside the response " +
+                        "from Google Books API"));
 
         JsonObject volumeInfo = response.getAsJsonObject("volumeInfo");
 
@@ -89,9 +90,10 @@ public class GoogleBooksAdapter implements GetBookDetails {
     }
 
     private String extractImage(JsonObject volumeInfo) {
-        Set<Map.Entry<String, JsonElement>> imageLinksSet = volumeInfo.getAsJsonObject("imageLinks").entrySet();
+        Set<Map.Entry<String, JsonElement>> imageLinksSet = volumeInfo.getAsJsonObject(
+                "imageLinks").entrySet();
 
-        if (isImageThumbnailLinkInResponse(imageLinksSet)){
+        if (isImageThumbnailLinkInResponse(imageLinksSet)) {
             return StreamSupport.stream(
                     imageLinksSet.spliterator(), false)
                     .filter(imageEntry -> imageEntry.getKey().equals("thumbnail"))
@@ -110,9 +112,9 @@ public class GoogleBooksAdapter implements GetBookDetails {
 
     private boolean isImageThumbnailLinkInResponse(Set<Map.Entry<String, JsonElement>> imageLinksSet) {
         return StreamSupport.stream(
-                        imageLinksSet.spliterator(), false)
-                    .filter(entry -> entry.getKey().equals("thumbnail"))
-                    .findFirst()
-                    .isEmpty();
+                imageLinksSet.spliterator(), false)
+                .filter(entry -> entry.getKey().equals("thumbnail"))
+                .findFirst()
+                .isEmpty();
     }
 }

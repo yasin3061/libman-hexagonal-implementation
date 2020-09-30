@@ -13,15 +13,15 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling
 @Import({
-		LibraryHexagonalConfig.class,
-		InventoryDomainConfig.class,
-		BorrowingDomainConfig.class,
-		EmailDomainConfig.class,
-		UserDomainConfig.class
+        LibraryHexagonalConfig.class,
+        InventoryDomainConfig.class,
+        BorrowingDomainConfig.class,
+        EmailDomainConfig.class,
+        UserDomainConfig.class
 })
 public class LibraryHexagonalApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(LibraryHexagonalApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LibraryHexagonalApplication.class, args);
+    }
 }

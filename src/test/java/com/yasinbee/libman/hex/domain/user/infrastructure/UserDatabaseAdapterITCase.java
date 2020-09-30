@@ -29,7 +29,7 @@ public class UserDatabaseAdapterITCase {
     private UserDatabaseAdapter userDatabase;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         userDatabase = new UserDatabaseAdapter(userRepository);
         databaseHelper = new DatabaseHelper(jdbcTemplate);
     }
@@ -37,7 +37,7 @@ public class UserDatabaseAdapterITCase {
     @Test
     @DisplayName("Save new user in database")
     @Sql(scripts = "/clean-database.sql", executionPhase = AFTER_TEST_METHOD)
-    public void shouldSaveDatabase(){
+    public void shouldSaveDatabase() {
         //given
         User user = new User(
                 new EmailAddress(UserTestData.johnDoeEmail()),

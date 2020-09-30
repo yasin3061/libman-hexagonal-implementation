@@ -28,11 +28,11 @@ public class ReservedBook implements Book {
         return bookId;
     }
 
-    public Long getAssignedUserIdAsLong(){
+    public Long getAssignedUserIdAsLong() {
         return userId;
     }
 
-    public Instant getReservedDateAsInstant(){
+    public Instant getReservedDateAsInstant() {
         return reservedDate;
     }
 }

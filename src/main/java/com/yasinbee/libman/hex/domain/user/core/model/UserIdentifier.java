@@ -9,7 +9,7 @@ public class UserIdentifier {
         this.id = id;
     }
 
-    public Long getAsLong(){
+    public Long getAsLong() {
         return id;
     }
 }

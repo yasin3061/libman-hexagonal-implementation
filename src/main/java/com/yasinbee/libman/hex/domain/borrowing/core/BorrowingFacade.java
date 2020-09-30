@@ -25,7 +25,8 @@ import com.yasinbee.libman.hex.domain.borrowing.core.ports.outgoing.BorrowingEve
 
 import java.util.List;
 
-public class BorrowingFacade implements MakeBookAvailable, ReserveBook, CancelOverdueReservations, BorrowBook, GiveBackBook {
+public class BorrowingFacade implements MakeBookAvailable, ReserveBook, CancelOverdueReservations
+        , BorrowBook, GiveBackBook {
 
     private final BorrowingDatabase database;
     private final BorrowingEventPublisher eventPublisher;
@@ -44,11 +45,11 @@ public class BorrowingFacade implements MakeBookAvailable, ReserveBook, CancelOv
     public Long handle(BookReservationCommand bookReservation) {
         AvailableBook availableBook =
                 database.getAvailableBook(bookReservation.getBookId())
-                .orElseThrow(() -> new AvailableBookNotFoundExeption(bookReservation.getBookId()));
+                        .orElseThrow(() -> new AvailableBookNotFoundExeption(bookReservation.getBookId()));
 
         ActiveUser activeUser =
                 database.getActiveUser(bookReservation.getUserId())
-                .orElseThrow(() -> new ActiveUserNotFoundException(bookReservation.getUserId()));
+                        .orElseThrow(() -> new ActiveUserNotFoundException(bookReservation.getUserId()));
 
         ReservedBook reservedBook = activeUser.reserve(availableBook);
         ReservationDetails reservationDetails = database.save(reservedBook);
@@ -70,7 +71,7 @@ public class BorrowingFacade implements MakeBookAvailable, ReserveBook, CancelOv
                         .orElseThrow(() -> new ActiveUserNotFoundException(borrowBookCommand.getUserId()));
         ReservedBook reservedBook =
                 database.getReservedBook(borrowBookCommand.getBookId())
-                .orElseThrow(() -> new ReservedBookNotFoundException(borrowBookCommand.getBookId()));
+                        .orElseThrow(() -> new ReservedBookNotFoundException(borrowBookCommand.getBookId()));
 
         BorrowedBook borrowedBook = activeUser.borrow(reservedBook);
         database.save(borrowedBook);
@@ -80,7 +81,7 @@ public class BorrowingFacade implements MakeBookAvailable, ReserveBook, CancelOv
     public void handle(GiveBackBookCommand command) {
         BorrowedBook borrowedBook =
                 database.getBorrowedBook(command.getBookId())
-                .orElseThrow(() -> new BorrowedBookNotFoundException(command.getBookId()));
+                        .orElseThrow(() -> new BorrowedBookNotFoundException(command.getBookId()));
         ActiveUser activeUser =
                 database.getActiveUser(command.getUserId())
                         .orElseThrow(() -> new ActiveUserNotFoundException(command.getUserId()));

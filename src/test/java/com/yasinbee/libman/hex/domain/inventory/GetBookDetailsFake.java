@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class GetBookDetailsFake implements GetBookDetails {
 
-    private Map<String, Book> books;
+    private final Map<String, Book> books;
 
     public GetBookDetailsFake() {
         books = new HashMap<String, Book>();

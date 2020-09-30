@@ -8,9 +8,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class LibraryHexagonalApplicationTests {
 
-	@Test
+    @Test
     @DisplayName("Test if Spring context is built")
-	void contextLoads() {
-	}
+    void contextLoads() {
+    }
 
 }

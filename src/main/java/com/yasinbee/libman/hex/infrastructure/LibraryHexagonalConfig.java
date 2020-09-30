@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 public class LibraryHexagonalConfig {
 
     @Bean
-    RestTemplate restTemplate(){
+    RestTemplate restTemplate() {
         return new RestTemplate();
     }
 }

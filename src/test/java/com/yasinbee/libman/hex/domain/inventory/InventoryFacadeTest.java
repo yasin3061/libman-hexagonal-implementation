@@ -30,7 +30,7 @@ public class InventoryFacadeTest {
 
     @Test
     @DisplayName("Correctly save a new book in a repository")
-    public void correctlySaveBook(){
+    public void correctlySaveBook() {
         //given
         AddNewBookCommand externalBookId = AddNewBookCommand
                 .builder()

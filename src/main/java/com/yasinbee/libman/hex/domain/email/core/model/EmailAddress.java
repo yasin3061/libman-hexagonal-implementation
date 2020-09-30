@@ -10,7 +10,7 @@ public class EmailAddress {
     public EmailAddress(String value) {
         Pattern pattern = Pattern.compile("^(.+)@(.+)$");
         Matcher matcher = pattern.matcher(value);
-        if(matcher.matches()){
+        if (matcher.matches()) {
             this.value = value;
         } else {
             throw new IllegalArgumentException("Provided value is not an email address");

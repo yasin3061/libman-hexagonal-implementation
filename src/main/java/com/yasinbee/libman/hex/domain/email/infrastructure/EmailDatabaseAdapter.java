@@ -19,7 +19,7 @@ public class EmailDatabaseAdapter implements EmailDatabase {
                     "SELECT title FROM book WHERE id = ?",
                     String.class,
                     bookId));
-        } catch (DataAccessException ex){
+        } catch (DataAccessException ex) {
             return Optional.empty();
         }
     }
@@ -31,7 +31,7 @@ public class EmailDatabaseAdapter implements EmailDatabase {
                     "SELECT email FROM library_user WHERE id = ?",
                     String.class,
                     userId));
-        } catch (DataAccessException ex){
+        } catch (DataAccessException ex) {
             return Optional.empty();
         }
     }

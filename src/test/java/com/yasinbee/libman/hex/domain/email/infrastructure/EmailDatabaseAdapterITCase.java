@@ -25,7 +25,7 @@ public class EmailDatabaseAdapterITCase {
     private EmailDatabaseAdapter emailDatabase;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         emailDatabase = new EmailDatabaseAdapter(jdbcTemplate);
         databaseHelper = new DatabaseHelper(jdbcTemplate);
     }

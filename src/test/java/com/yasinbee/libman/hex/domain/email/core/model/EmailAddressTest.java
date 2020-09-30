@@ -11,7 +11,7 @@ public class EmailAddressTest {
 
     @Test
     @DisplayName("Create correct EmailAddress")
-    public void givenCorrectEmailString_whenCreateEmailAddress_thenIsCreated(){
+    public void givenCorrectEmailString_whenCreateEmailAddress_thenIsCreated() {
         //given
         String emailString = "john.doe@test.com";
 
@@ -24,7 +24,7 @@ public class EmailAddressTest {
 
     @Test
     @DisplayName("Throw IllegalArgument exception for incorrect email")
-    public void givenInCorrectEmailString_whenCreateEmailAddress_thenThrowException(){
+    public void givenInCorrectEmailString_whenCreateEmailAddress_thenThrowException() {
         //given
         String notAnEmailString = "not an email";
         String emailWithoutAt = "tom[at]test.com";

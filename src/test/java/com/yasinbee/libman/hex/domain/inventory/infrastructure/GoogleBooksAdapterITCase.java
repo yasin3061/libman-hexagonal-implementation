@@ -29,7 +29,7 @@ public class GoogleBooksAdapterITCase {
 
     @Test
     @DisplayName("Get book details from Google Books")
-    public void givenCorrectBookId_whenGetBookDetails_thenReturnBookDetailsDTO(){
+    public void givenCorrectBookId_whenGetBookDetails_thenReturnBookDetailsDTO() {
         //given
         String homoDeusResponse = BookTestData.homoDeusGooleBooksResponse();
         Book homoDeusBook = BookTestData.homoDeusBook();
@@ -38,7 +38,7 @@ public class GoogleBooksAdapterITCase {
                 .andRespond(withSuccess(homoDeusResponse, MediaType.APPLICATION_JSON));
 
         //when
-        Book actualBook= googleBooks.handle(BookTestData.homoDeusBookGoogleId());
+        Book actualBook = googleBooks.handle(BookTestData.homoDeusBookGoogleId());
 
         //then
         assertEquals(homoDeusBook, actualBook);

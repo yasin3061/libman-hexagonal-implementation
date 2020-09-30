@@ -18,8 +18,8 @@ public class ActiveUser {
         this.borrowedBooks = borrowedBooks;
     }
 
-    public ReservedBook reserve(AvailableBook availableBook){
-        if (hasUserNotReachedLimitOfBooks()){
+    public ReservedBook reserve(AvailableBook availableBook) {
+        if (hasUserNotReachedLimitOfBooks()) {
             ReservedBook reservedBook = new ReservedBook(availableBook.getIdAsLong(), id);
             reservedBooks.add(reservedBook);
             return reservedBook;
@@ -28,8 +28,12 @@ public class ActiveUser {
         }
     }
 
+    private boolean hasUserNotReachedLimitOfBooks() {
+        return reservedBooks.size() + borrowedBooks.size() < 3;
+    }
+
     public BorrowedBook borrow(ReservedBook reservedBook) {
-        if (hasUserNotReachedLimitOfBooks()){
+        if (hasUserNotReachedLimitOfBooks()) {
             BorrowedBook borrowedBook = new BorrowedBook(reservedBook.getIdAsLong(), id);
             borrowedBooks.add(borrowedBook);
             return borrowedBook;
@@ -39,27 +43,25 @@ public class ActiveUser {
     }
 
     public AvailableBook giveBack(BorrowedBook borrowedBook) {
-        boolean isBookRemovedFromUserAccount = borrowedBooks.removeIf(book -> book.equals(borrowedBook));
-        if (isBookRemovedFromUserAccount){
+        boolean isBookRemovedFromUserAccount =
+                borrowedBooks.removeIf(book -> book.equals(borrowedBook));
+        if (isBookRemovedFromUserAccount) {
             return new AvailableBook(borrowedBook.getIdAsLong());
         } else {
-            throw new IllegalArgumentException("User with an id: " + id + " didn't borrow book with an id: " + borrowedBook.getIdAsLong());
+            throw new IllegalArgumentException("User with an id: " + id + " didn't borrow book " +
+                    "with an id: " + borrowedBook.getIdAsLong());
         }
     }
 
-    public Long getIdAsLong(){
+    public Long getIdAsLong() {
         return id;
     }
 
-    public List<ReservedBook> getReservedBookList(){
+    public List<ReservedBook> getReservedBookList() {
         return reservedBooks;
     }
 
     public List<BorrowedBook> getBorrowedBookList() {
         return borrowedBooks;
-    }
-
-    private boolean hasUserNotReachedLimitOfBooks(){
-        return reservedBooks.size() + borrowedBooks.size() < 3;
     }
 }

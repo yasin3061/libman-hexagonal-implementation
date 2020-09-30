@@ -30,7 +30,7 @@ public class EmailFacadeTest {
 
     @Test
     @DisplayName("Prepare & send reservation confirmation email")
-    public void shouldPrepareAndSendReservationConfirmation(){
+    public void shouldPrepareAndSendReservationConfirmation() {
         //given
         SendReservationConfirmationCommand sendReservationConfirmationCommand
                 = new SendReservationConfirmationCommand(1L, 1L, 1L);

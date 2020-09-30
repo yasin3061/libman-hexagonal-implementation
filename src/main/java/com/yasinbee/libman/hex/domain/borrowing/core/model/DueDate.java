@@ -8,7 +8,7 @@ import java.time.Instant;
 public class DueDate {
     private final Instant timeStamp;
 
-    public Instant asInstant(){
+    public Instant asInstant() {
         return timeStamp;
     }
 }

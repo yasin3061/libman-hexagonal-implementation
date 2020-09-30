@@ -18,7 +18,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name="book")
+@Table(name = "book")
 @EqualsAndHashCode
 public class Book {
 
@@ -29,34 +29,36 @@ public class Book {
     @Embedded
     private BookIdentification identification;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade= {CascadeType.DETACH, CascadeType.MERGE,
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name="book_author",
-            joinColumns=@JoinColumn(name="book_id"),
-            inverseJoinColumns=@JoinColumn(name="author_id"))
+            name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
-    @Column(name="publisher")
+    @Column(name = "publisher")
     private String publisher;
 
-    @Column(name="publishedDate")
+    @Column(name = "publishedDate")
     private String publishedDate;
 
-    @Column(name="description", columnDefinition="TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name="page_count")
+    @Column(name = "page_count")
     private int pages;
 
-    @Column(name="imageLink", columnDefinition="TEXT")
+    @Column(name = "imageLink", columnDefinition = "TEXT")
     @EqualsAndHashCode.Exclude
     private String imageLink;
 
-    public Book(BookIdentification identification, String title, Set<Author> authors, String publisher, String publishedDate, String description, int pages, String imageLink) {
+    public Book(BookIdentification identification, String title, Set<Author> authors,
+                String publisher, String publishedDate, String description, int pages,
+                String imageLink) {
         this.identification = identification;
         this.title = title;
         this.authors = authors;
@@ -67,10 +69,10 @@ public class Book {
         this.imageLink = imageLink;
     }
 
-    public Long getIdAsLong(){
-        return id;
+    private Book() {
     }
 
-    private Book() {
+    public Long getIdAsLong() {
+        return id;
     }
 }

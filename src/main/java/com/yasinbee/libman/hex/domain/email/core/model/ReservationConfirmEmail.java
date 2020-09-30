@@ -10,19 +10,19 @@ public class ReservationConfirmEmail {
     private final String subject;
     private final String content;
 
-    public String getFromEmailAddressAsString(){
+    public String getFromEmailAddressAsString() {
         return this.from.getAsString();
     }
 
-    public String getToEmailAddressAsString(){
+    public String getToEmailAddressAsString() {
         return this.to.getAsString();
     }
 
-    public String getSubjectAsString(){
+    public String getSubjectAsString() {
         return this.subject;
     }
 
-    public String getContentAsString(){
+    public String getContentAsString() {
         return this.content;
     }
 }

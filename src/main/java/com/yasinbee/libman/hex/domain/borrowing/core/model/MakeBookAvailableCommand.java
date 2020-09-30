@@ -8,5 +8,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class MakeBookAvailableCommand {
-    private Long bookId;
+    private final Long bookId;
 }

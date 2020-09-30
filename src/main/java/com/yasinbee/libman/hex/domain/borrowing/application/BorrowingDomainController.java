@@ -32,19 +32,24 @@ public class BorrowingDomainController {
     private final BorrowBook borrowBook;
 
     @PatchMapping("/{id}/status")
-    public ResponseEntity<String> borrowBook(@PathVariable("id") Long bookId, @RequestBody ChangeBookStatusRequest request){
-        switch (request.getStatus()){
+    public ResponseEntity<String> borrowBook(@PathVariable("id") Long bookId,
+                                             @RequestBody ChangeBookStatusRequest request) {
+        switch (request.getStatus()) {
             case AVAILABLE:
                 giveBackBook.handle(new GiveBackBookCommand(bookId, request.getUserId()));
-                return new ResponseEntity<>("Book with an id " + bookId + " was returned", HttpStatus.OK);
+                return new ResponseEntity<>("Book with an id " + bookId + " was returned",
+                        HttpStatus.OK);
             case RESERVED:
-                Long reservationId = reserveBook.handle(new BookReservationCommand(bookId, request.getUserId()));
+                Long reservationId = reserveBook.handle(new BookReservationCommand(bookId,
+                        request.getUserId()));
                 return new ResponseEntity<>("Reservation has been made with an id " + reservationId, HttpStatus.OK);
             case BORROWED:
                 borrowBook.handle(new BorrowBookCommand(bookId, request.getUserId()));
-                return new ResponseEntity<>("Book with an id " + bookId + " was borrowed", HttpStatus.OK);
+                return new ResponseEntity<>("Book with an id " + bookId + " was borrowed",
+                        HttpStatus.OK);
             default:
-                return new ResponseEntity<>("Book can't have status: " + request.getStatus(), HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Book can't have status: " + request.getStatus(),
+                        HttpStatus.BAD_REQUEST);
         }
     }
 }

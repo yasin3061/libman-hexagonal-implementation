@@ -10,7 +10,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClass;
 import static com.tngtech.archunit.library.Architectures.onionArchitecture;
 
 @AnalyzeClasses(packages = {"com.yasinbee.libman.hex.domain.inventory"},
-        importOptions = { ImportOption.DoNotIncludeTests.class })
+        importOptions = {ImportOption.DoNotIncludeTests.class})
 public class InventoryArchitectureTest {
 
     @ArchTest

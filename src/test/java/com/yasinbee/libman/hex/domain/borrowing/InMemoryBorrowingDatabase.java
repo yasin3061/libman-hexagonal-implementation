@@ -32,6 +32,20 @@ public class InMemoryBorrowingDatabase implements BorrowingDatabase {
     }
 
     @Override
+    public ReservationDetails save(ReservedBook reservedBook) {
+        Long reservationId = new Random().nextLong();
+        availableBooks.remove(reservedBook.getIdAsLong());
+        reservedBooks.put(reservationId, reservedBook);
+        return new ReservationDetails(new ReservationId(reservationId), reservedBook);
+    }
+
+    @Override
+    public void save(BorrowedBook borrowedBook) {
+        reservedBooks.remove(borrowedBook.getIdAsLong());
+        borrowedBooks.put(borrowedBook.getIdAsLong(), borrowedBook);
+    }
+
+    @Override
     public Optional<AvailableBook> getAvailableBook(Long bookId) {
         if (availableBooks.containsKey(bookId)) {
             return Optional.of(availableBooks.get(bookId));
@@ -50,29 +64,16 @@ public class InMemoryBorrowingDatabase implements BorrowingDatabase {
     }
 
     @Override
-    public ReservationDetails save(ReservedBook reservedBook) {
-        Long reservationId = new Random().nextLong();
-        availableBooks.remove(reservedBook.getIdAsLong());
-        reservedBooks.put(reservationId, reservedBook);
-        return new ReservationDetails(new ReservationId(reservationId), reservedBook);
-    }
-
-    @Override
-    public void save(BorrowedBook borrowedBook) {
-        reservedBooks.remove(borrowedBook.getIdAsLong());
-        borrowedBooks.put(borrowedBook.getIdAsLong(), borrowedBook);
-    }
-
-    @Override
     public List<OverdueReservation> findReservationsForMoreThan(Long days) {
         return reservedBooks.values().stream()
                 .filter(reservedBook ->
-                                Instant.now().isAfter(
-                                        reservedBook.getReservedDateAsInstant().plus(days, ChronoUnit.DAYS)))
+                        Instant.now().isAfter(
+                                reservedBook.getReservedDateAsInstant().plus(days,
+                                        ChronoUnit.DAYS)))
                 .map(reservedBook ->
                         new OverdueReservation(
-                            1L,
-                            reservedBook.getIdAsLong()))
+                                1L,
+                                reservedBook.getIdAsLong()))
                 .collect(Collectors.toList());
     }
 

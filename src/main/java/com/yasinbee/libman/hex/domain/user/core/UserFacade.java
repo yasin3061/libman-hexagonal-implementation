@@ -1,11 +1,11 @@
 package com.yasinbee.libman.hex.domain.user.core;
 
+import com.yasinbee.libman.hex.domain.user.core.model.AddUserCommand;
 import com.yasinbee.libman.hex.domain.user.core.model.EmailAddress;
 import com.yasinbee.libman.hex.domain.user.core.model.User;
 import com.yasinbee.libman.hex.domain.user.core.model.UserIdentifier;
 import com.yasinbee.libman.hex.domain.user.core.ports.incoming.AddNewUser;
 import com.yasinbee.libman.hex.domain.user.core.ports.outgoing.UserDatabase;
-import com.yasinbee.libman.hex.domain.user.core.model.AddUserCommand;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor

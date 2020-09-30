@@ -16,14 +16,15 @@ public class GoogleBookSearchClient {
 
     private final RestTemplate restTemplate;
 
-    public String searchForBooks(String query){
+    public String searchForBooks(String query) {
 
         HttpHeaders requestHeader = new HttpHeaders();
         requestHeader.add("Accept", MediaType.APPLICATION_JSON_VALUE);
         HttpEntity<Object> requestEntity = new HttpEntity<>(requestHeader);
 
         String searchQuery =
-                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40&printType=books&q=" + query.trim();
+                "https://www.googleapis.com/books/v1/volumes?langRestrict=en&maxResults=40" +
+                        "&printType=books&q=" + query.trim();
 
         ResponseEntity<String> responseEntity =
                 restTemplate.exchange(

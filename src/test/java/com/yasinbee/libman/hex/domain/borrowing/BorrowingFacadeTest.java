@@ -34,7 +34,7 @@ public class BorrowingFacadeTest {
     private BorrowingEventPublisher eventPublisher;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         database = new InMemoryBorrowingDatabase();
         eventPublisher = new BorrowingEventPublisherFake();
         facade = new BorrowingFacade(database, eventPublisher);
@@ -59,10 +59,12 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Make successful book reservation")
-    public void givenAvailableBooksAndActiveUser_whenMakingReservation_thenBookIsReserved(){
+    public void givenAvailableBooksAndActiveUser_whenMakingReservation_thenBookIsReserved() {
         //given
-        BookReservationCommand reservationCommand = ReservationTestData.anyBookReservationCommand(100L, 100L);
-        AvailableBook availableBook = ReservationTestData.anyAvailableBook(reservationCommand.getBookId());
+        BookReservationCommand reservationCommand =
+                ReservationTestData.anyBookReservationCommand(100L, 100L);
+        AvailableBook availableBook =
+                ReservationTestData.anyAvailableBook(reservationCommand.getBookId());
         ActiveUser activeUser = ReservationTestData.anyActiveUser(reservationCommand.getUserId());
 
         database.activeUsers.put(activeUser.getIdAsLong(), activeUser);
@@ -73,24 +75,34 @@ public class BorrowingFacadeTest {
 
         //then
         assertEquals(1, activeUser.getReservedBookList().size());
-        assertEquals(availableBook.getIdAsLong(), activeUser.getReservedBookList().get(0).getIdAsLong());
+        assertEquals(availableBook.getIdAsLong(),
+                activeUser.getReservedBookList().get(0).getIdAsLong());
     }
 
     @Test
     @DisplayName("User can't have more than 3 reservations")
-    public void givenActiveUserAlreadyHas3Books_whenMakingReservation_thenBookIsNotReserved(){
+    public void givenActiveUserAlreadyHas3Books_whenMakingReservation_thenBookIsNotReserved() {
         //given
-        BookReservationCommand firstReservationCommand = ReservationTestData.anyBookReservationCommand(100L, 100L);
-        BookReservationCommand secondReservationCommand = ReservationTestData.anyBookReservationCommand(101L, 100L);
-        BookReservationCommand thirdReservationCommand = ReservationTestData.anyBookReservationCommand(102L, 100L);
-        BookReservationCommand fourthReservationCommand = ReservationTestData.anyBookReservationCommand(103L, 100L);
+        BookReservationCommand firstReservationCommand =
+                ReservationTestData.anyBookReservationCommand(100L, 100L);
+        BookReservationCommand secondReservationCommand =
+                ReservationTestData.anyBookReservationCommand(101L, 100L);
+        BookReservationCommand thirdReservationCommand =
+                ReservationTestData.anyBookReservationCommand(102L, 100L);
+        BookReservationCommand fourthReservationCommand =
+                ReservationTestData.anyBookReservationCommand(103L, 100L);
 
-        AvailableBook availableBookNo1 = ReservationTestData.anyAvailableBook(firstReservationCommand.getBookId());
-        AvailableBook availableBookNo2 = ReservationTestData.anyAvailableBook(secondReservationCommand.getBookId());
-        AvailableBook availableBookNo3 = ReservationTestData.anyAvailableBook(thirdReservationCommand.getBookId());
-        AvailableBook availableBookNo4 = ReservationTestData.anyAvailableBook(fourthReservationCommand.getBookId());
+        AvailableBook availableBookNo1 =
+                ReservationTestData.anyAvailableBook(firstReservationCommand.getBookId());
+        AvailableBook availableBookNo2 =
+                ReservationTestData.anyAvailableBook(secondReservationCommand.getBookId());
+        AvailableBook availableBookNo3 =
+                ReservationTestData.anyAvailableBook(thirdReservationCommand.getBookId());
+        AvailableBook availableBookNo4 =
+                ReservationTestData.anyAvailableBook(fourthReservationCommand.getBookId());
 
-        ActiveUser activeUser = ReservationTestData.anyActiveUser(firstReservationCommand.getUserId());
+        ActiveUser activeUser =
+                ReservationTestData.anyActiveUser(firstReservationCommand.getUserId());
 
         database.availableBooks.put(availableBookNo1.getIdAsLong(), availableBookNo1);
         database.availableBooks.put(availableBookNo2.getIdAsLong(), availableBookNo2);
@@ -110,9 +122,10 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Try to reserve book,but it's not available")
-    public void givenNotAvailableBook_whenMakingReservation_thenThrowException(){
+    public void givenNotAvailableBook_whenMakingReservation_thenThrowException() {
         //given
-        BookReservationCommand reservationCommand = ReservationTestData.anyBookReservationCommand(100L, 100L);
+        BookReservationCommand reservationCommand =
+                ReservationTestData.anyBookReservationCommand(100L, 100L);
         ActiveUser activeUser = ReservationTestData.anyActiveUser(reservationCommand.getUserId());
 
         database.activeUsers.put(activeUser.getIdAsLong(), activeUser);
@@ -124,10 +137,12 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Try to reserve book, but active user is not found")
-    public void givenNotActiveUser_whenMakingReservation_thenThrowException(){
+    public void givenNotActiveUser_whenMakingReservation_thenThrowException() {
         //given
-        BookReservationCommand reservationCommand = ReservationTestData.anyBookReservationCommand(100L, 100L);
-        AvailableBook availableBook = ReservationTestData.anyAvailableBook(reservationCommand.getBookId());
+        BookReservationCommand reservationCommand =
+                ReservationTestData.anyBookReservationCommand(100L, 100L);
+        AvailableBook availableBook =
+                ReservationTestData.anyAvailableBook(reservationCommand.getBookId());
 
         database.availableBooks.put(availableBook.getIdAsLong(), availableBook);
 
@@ -139,7 +154,7 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Cancel reservation after 3 days")
-    public void givenBookIsReserved_when3daysPass_thenBookIsAvailable(){
+    public void givenBookIsReserved_when3daysPass_thenBookIsAvailable() {
         //given
         ReservedBook reservedBook = ReservationTestData.anyReservedBook(100L, 100L);
         changeReservationTimeFor(reservedBook, Instant.now().minus(4, ChronoUnit.DAYS));
@@ -152,9 +167,17 @@ public class BorrowingFacadeTest {
         assertEquals(0, database.reservedBooks.size());
     }
 
+    private void changeReservationTimeFor(ReservedBook reservedBook, Instant reservationDate) {
+        try {
+            FieldUtils.writeField(reservedBook, "reservedDate", reservationDate, true);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     @DisplayName("Do not cancel reservation after 2 days")
-    public void givenBookIsReserved_when2daysPass_thenBookIsStillReserved(){
+    public void givenBookIsReserved_when2daysPass_thenBookIsStillReserved() {
         //given
         ReservedBook reservedBook = ReservationTestData.anyReservedBook(100L, 100L);
         changeReservationTimeFor(reservedBook, Instant.now().minus(2, ChronoUnit.DAYS));
@@ -169,10 +192,11 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Successfully borrow a book")
-    public void givenReservedBookAndActiveUser_whenBorrowing_thenBookIsBorrowed(){
+    public void givenReservedBookAndActiveUser_whenBorrowing_thenBookIsBorrowed() {
         //given
         BorrowBookCommand borrowBookCommand = BorrowTestData.anyBorrowBookCommand(100L, 100L);
-        ReservedBook reservedBook = BorrowTestData.anyReservedBook(borrowBookCommand.getBookId(), borrowBookCommand.getUserId());
+        ReservedBook reservedBook = BorrowTestData.anyReservedBook(borrowBookCommand.getBookId(),
+                borrowBookCommand.getUserId());
         ActiveUser activeUser = BorrowTestData.anyActiveUser(borrowBookCommand.getUserId());
 
         database.activeUsers.put(activeUser.getIdAsLong(), activeUser);
@@ -187,11 +211,15 @@ public class BorrowingFacadeTest {
 
     @Test
     @DisplayName("Successful give back a book")
-    public void givenUserWithBorrowedBook_whenBookIsReturned_thenBookIsAvailable(){
+    public void givenUserWithBorrowedBook_whenBookIsReturned_thenBookIsAvailable() {
         //given
         GiveBackBookCommand giveBackBookCommand = BorrowTestData.anyGiveBookCommand(100L, 100L);
-        BorrowedBook borrowedBook = BorrowTestData.anyBorrowedBook(giveBackBookCommand.getBookId(), giveBackBookCommand.getUserId());
-        ActiveUser activeUser = BorrowTestData.anyActiveUserWithBorrowedBooks(giveBackBookCommand.getUserId(), new ArrayList<BorrowedBook>(Arrays.asList(borrowedBook)));
+        BorrowedBook borrowedBook =
+                BorrowTestData.anyBorrowedBook(giveBackBookCommand.getBookId(),
+                        giveBackBookCommand.getUserId());
+        ActiveUser activeUser =
+                BorrowTestData.anyActiveUserWithBorrowedBooks(giveBackBookCommand.getUserId(),
+                        new ArrayList<BorrowedBook>(Arrays.asList(borrowedBook)));
 
         database.borrowedBooks.put(borrowedBook.getIdAsLong(), borrowedBook);
         database.activeUsers.put(activeUser.getIdAsLong(), activeUser);
@@ -202,14 +230,7 @@ public class BorrowingFacadeTest {
         //then
         assertEquals(0, database.borrowedBooks.size());
         assertEquals(1, database.availableBooks.size());
-        assertEquals(0, database.activeUsers.get(activeUser.getIdAsLong()).getBorrowedBookList().size());
-    }
-
-    private void changeReservationTimeFor(ReservedBook reservedBook, Instant reservationDate) {
-        try {
-            FieldUtils.writeField(reservedBook, "reservedDate", reservationDate, true);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        assertEquals(0,
+                database.activeUsers.get(activeUser.getIdAsLong()).getBorrowedBookList().size());
     }
 }

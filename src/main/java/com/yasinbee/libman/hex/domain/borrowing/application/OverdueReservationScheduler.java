@@ -12,7 +12,7 @@ public class OverdueReservationScheduler {
     private final CancelOverdueReservations overdueReservations;
 
     @Scheduled(fixedRate = 60 * 1000)
-    public void checkOverdueReservations(){
+    public void checkOverdueReservations() {
         overdueReservations.cancelOverdueReservations();
     }
 }

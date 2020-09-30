@@ -11,17 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="author")
+@Table(name = "author")
 @EqualsAndHashCode
 @ToString
 public class Author {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="name", unique=true)
+    @Column(name = "name", unique = true)
     private String name;
 
     public Author(String name) {

@@ -23,37 +23,42 @@ public class BorrowingDomainConfig {
     }
 
     @Bean
-    public BorrowingEventPublisher borrowingEventPublisher(ApplicationEventPublisher applicationEventPublisher){
+    public BorrowingEventPublisher borrowingEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         return new SpringBorrowingEventPublisherAdapter(applicationEventPublisher);
     }
 
     @Bean
     @Qualifier("MakeBookAvailable")
-    public MakeBookAvailable makeBookAvailable(BorrowingDatabase database, BorrowingEventPublisher borrowingEventPublisher) {
+    public MakeBookAvailable makeBookAvailable(BorrowingDatabase database,
+                                               BorrowingEventPublisher borrowingEventPublisher) {
         return new BorrowingFacade(database, borrowingEventPublisher);
     }
 
     @Bean
     @Qualifier("ReserveBook")
-    public ReserveBook reserveBook(BorrowingDatabase database, BorrowingEventPublisher borrowingEventPublisher){
+    public ReserveBook reserveBook(BorrowingDatabase database,
+                                   BorrowingEventPublisher borrowingEventPublisher) {
         return new BorrowingFacade(database, borrowingEventPublisher);
     }
 
     @Bean
     @Qualifier("BorrowBook")
-    public BorrowBook borrowBook(BorrowingDatabase database, BorrowingEventPublisher borrowingEventPublisher){
+    public BorrowBook borrowBook(BorrowingDatabase database,
+                                 BorrowingEventPublisher borrowingEventPublisher) {
         return new BorrowingFacade(database, borrowingEventPublisher);
     }
 
     @Bean
     @Qualifier("GiveBackBook")
-    public GiveBackBook giveBackBook(BorrowingDatabase database, BorrowingEventPublisher borrowingEventPublisher){
+    public GiveBackBook giveBackBook(BorrowingDatabase database,
+                                     BorrowingEventPublisher borrowingEventPublisher) {
         return new BorrowingFacade(database, borrowingEventPublisher);
     }
 
     @Bean
     @Qualifier("CancelOverdueReservations")
-    public CancelOverdueReservations cancelOverdueReservations(BorrowingDatabase database, BorrowingEventPublisher borrowingEventPublisher){
+    public CancelOverdueReservations cancelOverdueReservations(BorrowingDatabase database,
+                                                               BorrowingEventPublisher borrowingEventPublisher) {
         return new BorrowingFacade(database, borrowingEventPublisher);
     }
 }

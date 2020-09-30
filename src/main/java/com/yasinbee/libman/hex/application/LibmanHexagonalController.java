@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class LibmanHexagonalController {
 
     @GetMapping("")
-    public String getAppRoot(){
+    public String getAppRoot() {
         return "Libman Hexagonal REST API";
     }
 }

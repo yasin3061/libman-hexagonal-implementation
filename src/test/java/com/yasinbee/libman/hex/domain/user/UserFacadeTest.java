@@ -19,14 +19,14 @@ public class UserFacadeTest {
     private UserFacade facade;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         database = new InMemoryUserDatabase();
         facade = new UserFacade(database);
     }
 
     @Test
     @DisplayName("Add new user")
-    public void shouldAddNewUser(){
+    public void shouldAddNewUser() {
         //given
         User expectedUser = new User(
                 new EmailAddress(UserTestData.johnDoeEmail()),

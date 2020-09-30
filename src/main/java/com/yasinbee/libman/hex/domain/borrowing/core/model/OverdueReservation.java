@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class OverdueReservation {
-    private Long reservationId;
-    private Long bookIdentification;
+    private final Long reservationId;
+    private final Long bookIdentification;
 
     public Long getBookIdentificationAsLong() {
         return bookIdentification;

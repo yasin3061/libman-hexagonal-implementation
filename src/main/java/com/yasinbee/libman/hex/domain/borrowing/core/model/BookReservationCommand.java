@@ -8,6 +8,6 @@ import lombok.Getter;
 @Getter
 @Builder
 public class BookReservationCommand {
-    private Long bookId;
-    private Long userId;
+    private final Long bookId;
+    private final Long userId;
 }

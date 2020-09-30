@@ -10,7 +10,7 @@ import javax.persistence.Embedded;
 @EqualsAndHashCode
 public class BookIdentification {
 
-    @Column(name="book_external_id")
+    @Column(name = "book_external_id")
     private String bookExternalId;
 
     @Embedded

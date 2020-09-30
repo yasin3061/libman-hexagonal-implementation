@@ -10,22 +10,22 @@ import java.util.ArrayList;
 
 public class ReservationTestData {
 
-    public static BookReservationCommand anyBookReservationCommand(Long bookId, Long userId){
+    public static BookReservationCommand anyBookReservationCommand(Long bookId, Long userId) {
         return BookReservationCommand.builder()
                 .bookId(bookId)
                 .userId(userId)
                 .build();
     }
 
-    public static ReservedBook anyReservedBook(Long bookId, Long userId){
+    public static ReservedBook anyReservedBook(Long bookId, Long userId) {
         return new ReservedBook(bookId, userId);
     }
 
-    public static AvailableBook anyAvailableBook(Long bookId){
+    public static AvailableBook anyAvailableBook(Long bookId) {
         return new AvailableBook(bookId);
     }
 
-    public static ActiveUser anyActiveUser(Long userId){
+    public static ActiveUser anyActiveUser(Long userId) {
         return new ActiveUser(userId, new ArrayList<ReservedBook>(), new ArrayList<BorrowedBook>());
     }
 }
