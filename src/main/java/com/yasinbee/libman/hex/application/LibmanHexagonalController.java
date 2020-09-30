@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/")
-public class LibraryHexagonalController {
+public class LibmanHexagonalController {
 
     @GetMapping("")
     public String getAppRoot(){
-        return "Library Hexagonal REST API";
+        return "Libman Hexagonal REST API";
     }
 }
