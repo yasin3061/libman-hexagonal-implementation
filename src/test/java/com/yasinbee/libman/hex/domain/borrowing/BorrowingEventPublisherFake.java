@@ -7,6 +7,6 @@ public class BorrowingEventPublisherFake implements BorrowingEventPublisher {
 
     @Override
     public void publish(BookReservedEvent event) {
-
+        //no-op
     }
 }
