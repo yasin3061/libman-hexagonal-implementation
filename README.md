@@ -1,7 +1,7 @@
 # Libman - Library Management application
 This application demonstrates the application of *Hexagonal (or Ports & Adapters) architecture*.
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yasin3061_libman-hexagonal-implementation&metric=alert_status)](https://sonarcloud.io/dashboard?id=yasin3061_libman-hexagonal-implementation) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Jave CI with Maven](https://github.com/yasin3061/libman-hexagonal-implementation/workflows/Java%20CI%20with%20Maven/badge.svg?branch=master) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=yasin3061_libman-hexagonal-implementation&metric=alert_status)](https://sonarcloud.io/dashboard?id=yasin3061_libman-hexagonal-implementation) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This application provides basic REST endpoints for managing library (add a new book, reserve
 , borrow it). 
