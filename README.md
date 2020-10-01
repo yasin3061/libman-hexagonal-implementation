@@ -65,9 +65,9 @@ Hexagonal architecture puts the core application in the center and exposes sever
   database, web controllers implements the `adapters` in order to connect to these `ports`.
   
 Here is how a typical application would look like.
-<IMG>
+![Ports & Adapters](https://yasinbhojawala.com/wp-content/uploads/Ports-adapters.png)
 In terms of our application, here is how it looks like.
-<IMG>
+![Project structure](https://yasinbhojawala.com/wp-content/uploads/Project-structure-PnA.png)
 Instead of `web`, `service`, and `dao` layers, we have `application`, `domain`, and `infrastructure` packages.
 
 The `application` package is reponsible for the delivery mechanism of the application. It could be via REST APIs, console-based, or desktop application. In our case, it is REST APIs via `Spring` controllers.
@@ -82,32 +82,81 @@ Because of this structure, our business logic is safeguarded against the externa
 
 ### Dependency inversion
 The **D** in **SOLID** talks about *Dependency Inversion*. The Hexagonal architecture promotes that. Let's have a look at the dependency diagram for this application.
-<IMG>
+![Ports and Adapters - dependency](https://yasinbhojawala.com/wp-content/uploads/Ports-and-Adapters-dependency.png)
 
-The core or the domain of our application does not depend on anything. It's a standalone entity. Instead, the other pieces depends on it. Here the dependency is *inverted*. This meas that our application need not respond to the external changes.
+The core or the domain of our application does not depend on anything. It's a standalone entity. All the dependencies are inward and none is outward. Here the dependency is *inverted*. This meas that our application need not respond to the external changes.
 
 ### The User domain
 Let's have a look at an example here. We will begin with the *User* domain as it is the simplest.
-
+![User domain overview](https://yasinbhojawala.com/wp-content/uploads/User-domain-overview.png)
 As we can see, the *User* domain is divided into three parts `application`, `core`, and `infrastructure`.
 
 The `application` contains `UserCommandController` which registers `Spring` controller. The controller uses `AddNewUser` **port** in order to serve the incoming reuests.
-<IMG>
+```java
+@RestController
+@RequestMapping("/users")
+@RequiredArgsConstructor
+public class UserCommandController {
+
+    private final AddNewUser addNewUser;
+
+    @PostMapping("")
+    public ResponseEntity<String> addNewUser(@RequestBody AddUserCommand addUserCommand) {
+        addNewUser.handle(addUserCommand);
+        return new ResponseEntity<>("New user was added to library", HttpStatus.CREATED);
+    }
+}
+```
 The `AddNewUser` is a simple interface. This interface is implemented by the `UserDatabaseAdapter` **adapter**.
-
+```java
+public interface AddNewUser {
+    UserIdentifier handle(AddUserCommand addUserCommand);
+}
+```
 The `UserDatabaseAdapter` further uses the `UserRepository` for persistence.
+```java
+@RequiredArgsConstructor
+public class UserDatabaseAdapter implements UserDatabase {
 
+    private final UserRepository userRepository;
+
+    @Override
+    public UserIdentifier save(User user) {
+        User savedUser = userRepository.save(user);
+        return new UserIdentifier(savedUser.getIdentifierAsLong());
+    }
+}
+```
 As we can figure out, the `core` does not need to know whether the requests are coming from an API or console. Similarly, it doesn't care about whether the data is saved to RDBMS or file storage.
 
 In fact, just to demonstrate, I have written the database adapter for `borrowing` domain completely differently. Go check it out!
 
 Basically, these `adapters` are interchangeable as long as they *fit in* to the `port`.
-<IMG>
+![Multiple Adapters](https://yasinbhojawala.com/wp-content/uploads/Multiple-Adapters.png)
 
 You will not find any references to Spring framework inside core. This is not just a recommendation but a requirement.
 
 This can be asserted by unit tests:
-<IMG>
+```java
+@AnalyzeClasses(packages = {"com.yasinbee.libman.hex.domain.user"},
+        importOptions = {ImportOption.DoNotIncludeTests.class})
+public class UserArchitectureTest {
+
+    @ArchTest
+    public static final ArchRule hexagonalArchInUserDomain = onionArchitecture()
+            .domainModels("com.yasinbee.libman.hex.domain.user.core.model..")
+            .domainServices("com.yasinbee.libman.hex.domain.user..")
+            .applicationServices("com.yasinbee.libman.hex.domain.user.application..")
+            .adapter("infrastructure", "com.yasinbee.libman.hex.domain.user.infrastructure..");
+
+    @ArchTest
+    public static final ArchRule noSpringDependenciesInUserFacade =
+            noClass(UserFacade.class)
+                    .should()
+                    .dependOnClassesThat()
+                    .resideInAPackage("org.springframework..");
+}
+```
 
 The above test asserts that anything in core must not be dependent on the Spring framework.
 
