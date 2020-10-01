@@ -66,19 +66,22 @@ Hexagonal architecture puts the core application in the center and exposes sever
   
 Here is how a typical application would look like.
 ![Ports & Adapters](https://yasinbhojawala.com/wp-content/uploads/Ports-adapters.png)
+
 In terms of our application, here is how it looks like.
 ![Project structure](https://yasinbhojawala.com/wp-content/uploads/Project-structure-PnA.png)
+
 Instead of `web`, `service`, and `dao` layers, we have `application`, `domain`, and `infrastructure` packages.
 
-The `application` package is reponsible for the delivery mechanism of the application. It could be via REST APIs, console-based, or desktop application. In our case, it is REST APIs via `Spring` controllers.
+The `application` package is responsible for the delivery mechanism of the application. It could be via REST APIs, console-based, or desktop application. In our case, it is REST APIs via `Spring` controllers.
 
-The `infrastructure` is reponsible to provide necessary gluing code for the application to run. In our case, its the `Spring` bean configuration.
+The `infrastructure` is responsible to provide necessary gluing code for the application to run
+. In our case, it's the `Spring` bean configuration.
 
-Finally, there is the `domain` which is the core of our application. The code in `domain` is the business code. It does not have any dependency on frameworks or fancy libraries. In fact, just by looking at the `domain` code, no one would be able to tell which framework is being used or how the application is being delivered.
+Finally, there is the `domain` which is the core of our application. The code in `domain` is the business code. It does not have any dependency on frameworks or fancy libraries. In fact, just by looking at the `domain` code, no one would be able to tell which framework is used or how the application is delivered.
 
-This idea is endorsed by *Uncle Bob* in his book **Clean Architecture**.
+*Uncle Bob* endorses this idea in his book **Clean Architecture**.
 
-Because of this structure, our business logic is safeguarded against the external world. 
+This logic safeguards our business logic from the external world. 
 
 ### Dependency inversion
 The **D** in **SOLID** talks about *Dependency Inversion*. The Hexagonal architecture promotes that. Let's have a look at the dependency diagram for this application.
@@ -89,9 +92,11 @@ The core or the domain of our application does not depend on anything. It's a st
 ### The User domain
 Let's have a look at an example here. We will begin with the *User* domain as it is the simplest.
 ![User domain overview](https://yasinbhojawala.com/wp-content/uploads/User-domain-overview.png)
-As we can see, the *User* domain is divided into three parts `application`, `core`, and `infrastructure`.
 
-The `application` contains `UserCommandController` which registers `Spring` controller. The controller uses `AddNewUser` **port** in order to serve the incoming reuests.
+As we can see, the *User* domain consists of three parts `application`, `core`, and
+ `infrastructure`.
+
+The `application` contains `UserCommandController` which registers `Spring` controller. The controller uses `AddNewUser` **port** in order to serve the incoming requests.
 ```java
 @RestController
 @RequestMapping("/users")
@@ -107,7 +112,7 @@ public class UserCommandController {
     }
 }
 ```
-The `AddNewUser` is a simple interface. This interface is implemented by the `UserDatabaseAdapter` **adapter**.
+The `AddNewUser` is a simple interface. The `UserDatabaseAdapter` **adapter** implements this interface.
 ```java
 public interface AddNewUser {
     UserIdentifier handle(AddUserCommand addUserCommand);
@@ -164,4 +169,4 @@ The above test asserts that anything in core must not be dependent on the Spring
 As we can see, we have two different ports, `incoming` and `outgoing`. The difference is that the requests coming in to the application are served by `incoming` ports. The requests going out of the application are served by the `outgoing` ports.
 
 ### Conclusion
-I hope this sample gave you rough idea about the practical implementation of the hexagonal architecture using `Spring` and `Java`. I have really liked this approach. Its easy to maintain and talks business instead of technical jargons.
+I hope this sample gave you rough idea about the practical implementation of the hexagonal architecture using `Spring` and `Java`. I have really liked this approach. It's easy to maintain and talks business instead of technical jargon.
