@@ -65,9 +65,11 @@ Hexagonal architecture puts the core application in the center and exposes sever
   database, web controllers implements the `adapters` in order to connect to these `ports`.
   
 Here is how a typical application would look like.
+
 ![Ports & Adapters](https://yasinbhojawala.com/wp-content/uploads/Ports-adapters.png)
 
 In terms of our application, here is how it looks like.
+
 ![Project structure](https://yasinbhojawala.com/wp-content/uploads/Project-structure-PnA.png)
 
 Instead of `web`, `service`, and `dao` layers, we have `application`, `domain`, and `infrastructure` packages.
