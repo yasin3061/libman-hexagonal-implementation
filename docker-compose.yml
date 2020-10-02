@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    image: "postgres:9.6-alpine"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_SERVER=postgres
+      - POSTGRES_DB=libmandb
+      - POSTGRES_USER=libman-user
+      - POSTGRES_PASSWORD=libman
+
+  library:
+    build: .
+    container_name: libman-hex-app
+    ports:
+      - 8080:8080
+    environment:
+      - POSTGRES_SERVER=postgres
+      - POSTGRES_DB=libmandb
+      - POSTGRES_USER=libman-user
+      - POSTGRES_PASSWORD=libman
+
+volumes:
+  postgres-data:

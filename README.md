@@ -20,6 +20,15 @@ Concepts:
 * TDD
 
 ## Getting started
+### Using docker-compose
+From the project root directory, run the following command:
+```console
+$ docker-compose up
+```
+
+The `Dockerfile` is optimised in such a way that it will only download the dependencies only if
+ the `pom.xml` is changed.
+
 #### Using Maven (with H2 or local Postgres database)
 
 Compile the application:
