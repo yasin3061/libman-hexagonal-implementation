@@ -9,3 +9,4 @@ before_install:
 
 script:
   - docker run yasinb/libman-hex
+  - docker run yasinb/libman-hex mvn integration-test
