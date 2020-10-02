@@ -1,0 +1,10 @@
+sudo: required
+
+serivces:
+  - docker
+
+before_install
+ - docker build -t yasinb/libman-hex -f Dockerenv.dev .
+
+script:
+  - docker run yasinb/libman-hex
