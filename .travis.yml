@@ -5,11 +5,18 @@ serivces:
   - docker
 
 before_install:
- - docker build -t yasinb/libman-hex -f Dockerfile.dev .
+ - docker build -t yasinb/libman-hex-app -f Dockerfile.dev .
 
 script:
-  - docker run yasinb/libman-hex
-  - docker run yasinb/libman-hex mvn integration-test
+  - docker run yasinb/libman-hex-app
+  - docker run yasinb/libman-hex-app mvn integration-test
+
+after_success:
+ - docker build -t yasinb/libman-hex-app .
+ - docker build -t yasinb/libman-hex-proxy ./nginx
+ - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USER" --password-stdin
+ - docker push yasinb/libman-hex-app
+ - docker push yasinb/libman-hex-proxy
 
 deploy:
   provider: elasticbeanstalk

@@ -16,13 +16,22 @@ services:
   library:
     build: .
     container_name: libman-hex-app
-    ports:
-      - 8080:8080
     environment:
       - POSTGRES_SERVER=postgres
       - POSTGRES_DB=libmandb
       - POSTGRES_USER=libman-user
       - POSTGRES_PASSWORD=libman
+    depends_on:
+      - postgres
+
+  proxy:
+    restart: always
+    build:
+      context: ./nginx
+    ports:
+    - 80:80
+    depends_on:
+      - library
 
 volumes:
   postgres-data:
