@@ -10,3 +10,15 @@ before_install:
 script:
   - docker run yasinb/libman-hex
   - docker run yasinb/libman-hex mvn integration-test
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-2'
+  app: 'libman-hex-app'
+  env: 'LibmanHexApp-env'
+  bucket_name: 'elasticbeanstalk-us-east-2-948261954108'
+  bucket_path: 'libman-hex-app'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
