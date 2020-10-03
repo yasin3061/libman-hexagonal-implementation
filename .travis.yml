@@ -14,10 +14,10 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: 'us-east-2'
-  app: 'libman-hex-app'
-  env: 'LibmanHexApp-env'
+  app: 'libman'
+  env: 'Libman-env'
   bucket_name: 'elasticbeanstalk-us-east-2-948261954108'
-  bucket_path: 'libman-hex-app'
+  bucket_path: 'libman'
   on:
     branch: master
   access_key_id: $AWS_ACCESS_KEY
