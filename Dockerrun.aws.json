@@ -6,7 +6,7 @@
       "image": "yasinb/libman-hex-app",
       "hostname": "library",
       "essential": false,
-      "memory": 256
+      "memory": 512
     },
     {
       "name": "proxy",
