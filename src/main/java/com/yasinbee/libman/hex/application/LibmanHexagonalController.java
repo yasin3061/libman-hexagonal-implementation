@@ -10,6 +10,6 @@ public class LibmanHexagonalController {
 
     @GetMapping("")
     public String getAppRoot() {
-        return "AWS EB Deployment test";
+        return "Libman Hexagonal REST API";
     }
 }
