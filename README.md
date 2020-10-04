@@ -179,5 +179,31 @@ The above test asserts that anything in core must not be dependent on the Spring
 ### Different ports
 As we can see, we have two different ports, `incoming` and `outgoing`. The difference is that the requests coming in to the application are served by `incoming` ports. The requests going out of the application are served by the `outgoing` ports.
 
+### CI CD Infrastructure
+The CI CD pipeline utilizes automation tools and **infrastructure-as-code** for continuous
+ deployment.
+ 
+Here is the [link to the video](https://yasinbhojawala.com/wp-content/uploads/Infrastructure-demo
+.webm) explaining the build and deployment pipeline. 
+
+
+Basically, we push the code to master, Travis will start performing these steps.
+* Build & test
+* Create docker images
+* Push docker images to docker hub
+
+![CI CD Pipeline](https://yasinbhojawala.com/wp-content/uploads/Libman-AWS-Beanstalk-infra-CD-Pipeline.png)
+
+Once Travis pushes the images, it notifies Elasticbeanstalk and the deployment begins.
+
+Here is how the overall setup for the application looks like.
+![App infrastructure](https://yasinbhojawala.com/wp-content/uploads/Libman-AWS-Beanstalk-infra-Libman-infrastructure.png)
+
+Nginx is our proxy, and the App is our `Spring` application running on port `8080`. The application
+ talks to the RDS instance running Postgres on port `5432`. The port `80` is exposed to the outside
+ world. No other ports are exposed.
+
 ### Conclusion
-I hope this sample gave you rough idea about the practical implementation of the hexagonal architecture using `Spring` and `Java`. I have really liked this approach. It's easy to maintain and talks business instead of technical jargon.
+I hope this sample gave you rough idea about the practical implementation of the hexagonal
+ architecture using `Spring` and `Java`. Finally, we saw how to create an end-to-end CD pipeline
+  using Travis, Docker and AWS.
