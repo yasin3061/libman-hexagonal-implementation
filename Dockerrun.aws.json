@@ -2,16 +2,16 @@
   "AWSEBDockerrunVersion": "2",
   "containerDefinitions": [
     {
-      "name": "libman-hex-app",
+      "name": "library",
       "image": "yasinb/libman-hex-app",
-      "hostname": "libman-hex-app",
+      "hostname": "library",
       "essential": false,
       "memory": 256
     },
     {
-      "name": "libman-hex-proxy",
+      "name": "proxy",
       "image": "yasinb/libman-hex-proxy",
-      "hostname": "libman-hex-proxy",
+      "hostname": "proxy",
       "essential": true,
       "portMappings": [
         {
@@ -19,7 +19,7 @@
           "containerPort": 80
         }
       ],
-      "links": ["libman-hex-app"],
+      "links": ["library"],
       "memory": 256
     }
   ]
