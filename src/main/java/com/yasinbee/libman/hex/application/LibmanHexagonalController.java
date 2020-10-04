@@ -10,6 +10,6 @@ public class LibmanHexagonalController {
 
     @GetMapping("")
     public String getAppRoot() {
-        return "Elasticbeanstalk demo";
+        return "Libman Hexagonal REST API";
     }
 }
