@@ -102,6 +102,7 @@ The core or the domain of our application does not depend on anything. It's a st
 
 ### The User domain
 Let's have a look at an example here. We will begin with the *User* domain as it is the simplest.
+
 ![User domain overview](https://yasinbhojawala.com/wp-content/uploads/User-domain-overview.png)
 
 As we can see, the *User* domain consists of three parts `application`, `core`, and
@@ -175,7 +176,7 @@ public class UserArchitectureTest {
 ```
 
 The above test asserts that anything in core must not be dependent on the Spring framework.
-Source code credits: @wkrzywiec
+Credits: @wkrzywiec
 ### Different ports
 As we can see, we have two different ports, `incoming` and `outgoing`. The difference is that the requests coming in to the application are served by `incoming` ports. The requests going out of the application are served by the `outgoing` ports.
 
