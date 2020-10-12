@@ -176,7 +176,7 @@ public class UserArchitectureTest {
 ```
 
 The above test asserts that anything in core must not be dependent on the Spring framework.
-Credits: @wkrzywiec
+Credits: ![@wkrzywiec](https://github.com/wkrzywiec/library-hexagonal)
 ### Different ports
 As we can see, we have two different ports, `incoming` and `outgoing`. The difference is that the requests coming in to the application are served by `incoming` ports. The requests going out of the application are served by the `outgoing` ports.
 
